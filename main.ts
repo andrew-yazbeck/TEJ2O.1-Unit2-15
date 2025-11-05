@@ -6,27 +6,30 @@
 */
 
 // variables
-let ones: number = 0
-let tens: number = 0
+let sprite: game.LedSprite = null
+let loopCounter1 = 0
+let loopCounter2 = 0
 
 // setup
+basic.clearScreen()
 basic.showIcon(IconNames.Happy)
 
-// when "A" is pressed, the pixels move down in a diagnol
+// when "A" is pressed, the pixels move cw
 input.onButtonPressed(Button.A, function () {
     // setup
     basic.clearScreen()
-
-    tens = 0
-    while (tens <= 9) {
-        ones = 0
-        while (ones <= 9) {
-            basic.showString(tens.toString() + ones.toString())
-            ones++
+    sprite = game.createSprite(0, 0)
+    loopCounter1 = 0
+    while (loopCounter1 < 4) {
+        loopCounter1 = loopCounter1 + 1
+        loopCounter2 = 0
+        while (loopCounter2 < 4) {
+            sprite.move(1)
+            basic.pause(200)
+            loopCounter2 = loopCounter2 + 1
         }
-        tens++
+        sprite.turn(Direction.Right, 90)
     }
-
-    basic.pause(500)
-    basic.showIcon(IconNames.Happy)
+    sprite.delete()
+    basic.showIcon(IconNames.Yes)
 })
